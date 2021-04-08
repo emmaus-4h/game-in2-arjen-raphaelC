@@ -11,7 +11,9 @@ Basis: uitleg, spelen, afgaan en punten
 - [x] maak index.html, style.css en script.js met canvas
 - [ ] teken speler
 - [ ] beweeg speler
-- [ ] ... *(vul zelf aan)*
+- [ ] track tekenen
+- [ ] Auto tekenen
+- [ ] Obstakels maken
 - [ ] punten op scherm zetten
 - [ ] punten kunnen scoren
 - [ ] uitlegscherm
