@@ -109,7 +109,10 @@ var beweegKogel = function() {
  */
 var beweegSpeler = function() {
   if (keyIsDown(KEY_LEFT)) {
-    spelerX = spelerX - 1;
+    spelerX = spelerX - 10;
+  }
+  if (keyIsDown(KEY_RIGHT)) {
+    spelerX = spelerX + 10;
   }
 };
 
