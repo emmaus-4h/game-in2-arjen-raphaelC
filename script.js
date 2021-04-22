@@ -46,9 +46,9 @@ var KEY_RIGHT = 39; // rechter pijltje
 /**
  * Tekent het speelveld
  */
+
 var tekenVeld = function () {
-  fill("green");
-  rect(20, 20, width - 2 * 20, height - 2 * 20);
+  background("green");
 };
 
 
@@ -83,7 +83,7 @@ var tekenKogel = function(x, y) {
  */
 var tekenSpeler = function(x, y) {
   fill("white");
-  ellipse(x, y, 50, 50);
+  rect(x, y, 50, 50);
 };
 
 
