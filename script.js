@@ -99,7 +99,7 @@ var beweegVijand = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogel = function() {
-
+  
 };
 
 
@@ -109,10 +109,10 @@ var beweegKogel = function() {
  */
 var beweegSpeler = function() {
   if (keyIsDown(KEY_LEFT)) {
-    spelerX = spelerX - 10;
+    spelerX = spelerX - 20;
   }
   if (keyIsDown(KEY_RIGHT)) {
-    spelerX = spelerX + 10;
+    spelerX = spelerX + 20;
   }
 };
 
