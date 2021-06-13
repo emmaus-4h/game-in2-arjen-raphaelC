@@ -22,20 +22,20 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
-var spelerX = 630; // x-positie van speler
-var spelerY = 600; // y-positie van speler
+var spelerX = 630;      // x-positie van speler
+var spelerY = 600;      // y-positie van speler
 
-var kogelX = 0;    // x-positie van kogel
-var kogelY = 0;    // y-positie van kogel
+var kogelX = spelerX;   // x-positie van kogel
+var kogelY = spelerY;   // y-positie van kogel
 
-var vijandX = 0;   // x-positie van vijand
-var vijandY = 0;   // y-positie van vijand
+var vijandX = 630;      // x-positie van vijand
+var vijandY = 0;        // y-positie van vijand
 
-var score = 0; // aantal behaalde punten
+var score = 0;          // aantal behaalde punten
 
-var KEY_LEFT  = 37; // linker pijltje
-var KEY_RIGHT = 39; // rechter pijltje
-
+var KEY_LEFT = 37;     // linker pijltje
+var KEY_RIGHT = 39;     // rechter pijltje
+var KEY_SPACEBAR = 32;  // spatiebalk
 
 
 /* ********************************************* */
@@ -48,7 +48,7 @@ var KEY_RIGHT = 39; // rechter pijltje
  */
 
 var tekenVeld = function () {
-  background("green");
+  background("blue");
 };
 
 
@@ -58,9 +58,19 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 
-var tekenVijand = function(x, y) {
+var tekenVijand = function (x, y) {
+  fill("brown");
+  circle(vijandX, vijandY, 30, 30);
+};
 
-
+/**
+ * Tekent de speler
+ * @param {number} x x-coördinaat
+ * @param {number} y y-coördinaat
+ */
+var tekenSpeler = function(x, y) {
+  fill("white");
+  rect(spelerX, spelerY, 50, 50);
 };
 
 
@@ -70,36 +80,30 @@ var tekenVijand = function(x, y) {
  * @param {number} y y-coördinaat
  */
 
-var tekenKogel = function(x, y) {
-
-
+var tekenKogel = function (x, y) {
+  fill("gray");
+  circle(kogelX + 10, kogelY + 10, 10, 10);
 };
-
-
-/**
- * Tekent de speler
- * @param {number} x x-coördinaat
- * @param {number} y y-coördinaat
- */
-var tekenSpeler = function(x, y) {
-  fill("white");
-  rect(x, y, 50, 50);
-};
-
 
 /**
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
-var beweegVijand = function() {
-    
+var beweegVijand = function () {
+  vijandY = vijandY + 3
 };
 
 
 /**
  * Updatet globale variabelen met positie van kogel of bal
  */
-var beweegKogel = function() {
-  
+var beweegKogel = function keyPressed(KEY_SPACEBAR) {
+  kogelY = kogelY - 10;
+  if (keyIsDown(KEY_LEFT)) {
+    kogelX = kogelX - 20;
+  }
+  if (keyIsDown(KEY_RIGHT)) {
+    kogelX = kogelX + 20;
+  }
 };
 
 
@@ -107,7 +111,7 @@ var beweegKogel = function() {
  * Kijkt wat de toetsen/muis etc zijn.
  * Updatet globale variabele spelerX en spelerY
  */
-var beweegSpeler = function() {
+var beweegSpeler = function () {
   if (keyIsDown(KEY_LEFT)) {
     spelerX = spelerX - 20;
   }
@@ -121,7 +125,7 @@ var beweegSpeler = function() {
  * Zoekt uit of de vijand is geraakt
  * @returns {boolean} true als vijand is geraakt
  */
-var checkVijandGeraakt = function() {
+var checkVijandGeraakt = function () {
 
   return false;
 };
@@ -132,8 +136,8 @@ var checkVijandGeraakt = function() {
  * bijvoorbeeld door botsing met vijand
  * @returns {boolean} true als speler is geraakt
  */
-var checkSpelerGeraakt = function() {
-    
+var checkSpelerGeraakt = function () {
+
   return false;
 };
 
@@ -142,8 +146,8 @@ var checkSpelerGeraakt = function() {
  * Zoekt uit of het spel is afgelopen
  * @returns {boolean} true als het spel is afgelopen
  */
-var checkGameOver = function() {
-    
+var checkGameOver = function () {
+
   return false;
 };
 
@@ -154,11 +158,13 @@ var checkGameOver = function() {
  * de p5 library, zodra het spel geladen is in de browser
  */
 function setup() {
+  // Kleur de achtergrond blauw, zodat je het kunt zien
+  background("blue");
+
   // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
 
-  // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('blue');
+
 }
 
 
@@ -173,12 +179,12 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-      
+
       if (checkVijandGeraakt()) {
         // punten erbij
         // nieuwe vijand maken
       }
-      
+
       if (checkSpelerGeraakt()) {
         // leven eraf of gezondheid verlagen
         // eventueel: nieuwe speler maken
